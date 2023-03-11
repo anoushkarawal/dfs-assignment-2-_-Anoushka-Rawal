@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+
+}
+  .card {
+    
+    width: 600px;
+  height: 600px;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  margin: -50px 0 0 -50px;
+
+  }
+  .h2 {
+    left: 50%;
+  }
+
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+</head>
+<body bgcolor="#90caf9">
+
+<h2>Sign up</h2>
+
+
+<div class="row">
+    <div class="col s12 m6">
+      <div class="card darken-1">
+        <div class="card-content white-text">
+          <span class="card-title">Card Title</span>
+          <form class = 'ad-form'>
+            <div class="mb-3">
+                <label for="InputName" class="form-label">Name</label>
+                <input type="text" class="form-control" id="InputName" onclick="clickedinput(this.id)"> 
+              </div>
+            <div class="mb-3">
+              <label for="InputEmail" class="form-label">Email address</label>
+              <input type="email" class="form-control" id="InputEmail" onclick="clickedinput(this.id)">
+            </div>
+            <div class="mb-3">
+              <label for="InputPass" class="form-label">Password</label>
+              <input type="password" class="form-control" id="InputPass" onclick="clickedinput(this.id)">
+            </div>
+            <div class="mb-3">
+                <label for="InputAddress" class="form-label">Address</label>
+                <input type="text" class="form-control" id="InputAddress" onclick="clickedinput(this.id)">
+              </div>
+              <div class="mb-3">
+                <label for="InputPhone" class="form-label">Phone Number</label>
+                <input type="number" class="form-control" id="InputPhone" onclick="clickedinput(this.id)">
+              </div>
+              <div class="mb-3">
+                <label for="InputDOB" class="form-label">Date of Birth</label>
+                <input type="date" class="form-control" id="InputDOB" onclick="clickedinput(this.id)">
+              </div>
+        
+            <button type="submit" style="background-color:#90caf9; color:#888;" class="btn btn-primary" onclick="submitbutton()">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+<div id="adModal" class="modal">
+
+  
+  <div class="modal-content">
+    <button class="close .modal-close" disabled>&times;</button>
+    <div class="popup-timer">Advertisement:<span class="seconds"></span> second(s) left</div>
+    <img src="https://images.unsplash.com/photo-1558391743-ca83be23f286?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=952&q=80" style ="max-width:100%;max-height:100%;"/>
+  </div>
+ 
+</div>
+
+<script>
+var modal = document.getElementById("adModal");
+var span = document.getElementsByClassName("close")[0];
+
+function myFunction() {
+    $duration = 5;
+			$('.seconds').text($duration);
+			$myTimer = setInterval(function(){ startTimer() }, 1000);
+			function startTimer(){
+				$duration--;
+				$('.seconds').text($duration);
+				if($duration==0){
+					clearInterval($myTimer);
+
+				}
+			}
+  setTimeout(()=>{
+    span.disabled = false;			
+    
+    console.log('Button Activated')}, 5000)
+    span.disabled = true;
+    span.onclick = function() {
+        modal.style.display = "none";
+}
+
+}
+
+
+
+var typingTimer;               
+var doneTypingInterval = 3000; 
+
+
+var $input = $('#InputName'); // default value
+
+function clickedinput(element){
+    console.log($input);
+    $input = $('#'+element);
+
+$input.on('keyup', function () {
+  clearTimeout(typingTimer);
+  typingTimer = setTimeout(doneTyping, doneTypingInterval);
+});
+
+
+$input.on('keydown', function () {
+  clearTimeout(typingTimer);
+});
+
+
+function doneTyping () {
+  modal.style.display = "block";
+  myFunction();
+}
+}
+function submitbutton(){
+    alert("Your form has been submitted");
+}
+
+</script>
+
+</body>
+</html>
